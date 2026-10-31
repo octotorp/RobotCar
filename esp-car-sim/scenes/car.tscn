@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://d6d3ujhrhqqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0jew"]
+size = Vector2(60, 40)
+
+[node name="Car" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp = 3.0
+angular_damp = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b0jew")
+
+[node name="Rays" type="Node2D" parent="."]
+
+[node name="RayFront" type="RayCast2D" parent="Rays"]
+position = Vector2(30, 0)
+target_position = Vector2(150, 0)
+
+[node name="RayBack" type="RayCast2D" parent="Rays"]
+position = Vector2(-30, 0)
+target_position = Vector2(-150, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="Rays"]
+position = Vector2(0, -20)
+target_position = Vector2(0, -150)
+
+[node name="RayRight" type="RayCast2D" parent="Rays"]
+position = Vector2(0, 20)
+target_position = Vector2(0, 150)
+
+[node name="ColorBody" type="Node2D" parent="."]
+
+[node name="Body" type="ColorRect" parent="ColorBody"]
+offset_left = -30.0
+offset_top = -20.0
+offset_right = 30.0
+offset_bottom = 20.0
+color = Color(0.87222683, 0.41360003, 0.88, 1)
+
+[node name="HeadLights" type="ColorRect" parent="ColorBody"]
+offset_left = 24.0
+offset_top = -10.0
+offset_right = 28.0
+offset_bottom = 10.0
+
+[node name="Wheel_FL" type="ColorRect" parent="ColorBody"]
+offset_left = 14.0
+offset_top = -26.0
+offset_right = 30.0
+offset_bottom = -20.0
+color = Color(0, 0, 0, 1)
+
+[node name="Wheel_FR" type="ColorRect" parent="ColorBody"]
+offset_left = 14.0
+offset_top = 20.0
+offset_right = 30.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="Wheel_BL" type="ColorRect" parent="ColorBody"]
+offset_left = -30.0
+offset_top = -26.0
+offset_right = -14.0
+offset_bottom = -20.0
+color = Color(0, 0, 0, 1)
+
+[node name="Wheel_BR" type="ColorRect" parent="ColorBody"]
+offset_left = -30.0
+offset_top = 20.0
+offset_right = -14.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="TargetMarker" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(0.85, 1, 0, 1)
