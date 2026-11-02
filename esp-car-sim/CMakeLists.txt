@@ -15,7 +15,7 @@ add_subdirectory(godot-cpp)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "src/*.h")
 
-add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS} "src/neural_net.cpp")
 target_link_libraries(${PROJECT_NAME} PRIVATE godot::cpp)
 
 # Прямі шляхи до заголовків (включаючи Eigen):

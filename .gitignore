@@ -3,3 +3,4 @@ esp-car-sim/.godot/
 esp-car-sim/.vs/
 esp-car-sim/out/
 esp-car-sim/godot-cpp/
+esp-car-sim/eigen/

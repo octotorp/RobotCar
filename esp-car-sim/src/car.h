@@ -5,6 +5,8 @@
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/color_rect.hpp>
 
+#include "neural_net.h"
+
 namespace godot
 {
 
@@ -13,6 +15,8 @@ namespace godot
 		GDCLASS(Car, RigidBody2D);
 
 	private:
+		NeuralNet brain;
+
 		double motor_force = 150.;
 
 		RayCast2D* ray_front = nullptr;

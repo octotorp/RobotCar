@@ -42,20 +42,35 @@ void Car::_physics_process(double delta)
 	double drive = input->get_axis("ui_down", "ui_up");
 	double turn = input->get_axis("ui_left", "ui_right");
 
+	Matrix<float, 6, 1> inputs;
+	inputs << (float)(d_front / 150.0),
+		(float)(d_back / 150.0),
+		(float)(d_left / 150.0),
+		(float)(d_right / 150.0),
+		(float)drive,
+		(float)turn;
+
+	auto motors_output = brain.forward(inputs);
+
 	if (target_marker) {
 		// -4.0 робимо для того, щоб крапка розміром 8х8 була відцентрована:
 		Vector2 marker_pos = Vector2(drive * 60.0 - 4.0, turn * 60.0 - 4.0);
 		target_marker->set_position(marker_pos);
 	}
 
-	double left_power = Math::clamp(drive + turn, -1.0, 1.0);
+	/*double left_power = Math::clamp(drive + turn, -1.0, 1.0);
 	double right_power = Math::clamp(drive - turn, -1.0, 1.0);
 
 	apply_wheel_force(POS_FL, left_power);
 	apply_wheel_force(POS_BL, left_power);
 
 	apply_wheel_force(POS_FR, right_power);
-	apply_wheel_force(POS_BR, right_power);
+	apply_wheel_force(POS_BR, right_power);*/
+
+	apply_wheel_force(POS_FL, motors_output(0));
+	apply_wheel_force(POS_BL, motors_output(1));
+	apply_wheel_force(POS_FR, motors_output(2));
+	apply_wheel_force(POS_BR, motors_output(3));
 
 
 	if (input->is_key_pressed(Key::KEY_G))
@@ -70,6 +85,10 @@ void Car::_physics_process(double delta)
 			<< "d_right: " << d_right << ";\n"
 			;
 		file.close();
+	}
+	if (input->is_key_pressed(Key::KEY_R))
+	{
+		brain = NeuralNet();
 	}
 	// --- TEST --
 }
