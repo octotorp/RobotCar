@@ -1,5 +1,6 @@
 #include "neural_net.h"
 #include <random>
+#include <fstream>
 
 NeuralNet::NeuralNet()
 {
@@ -43,4 +44,33 @@ void NeuralNet::mutate(float rate, float strength)
 	mutate_matrix(w2);
 	mutate_matrix(b2);
 
+}
+
+
+bool NeuralNet::save_binary(const std::string& filename) {
+	std::ofstream file(filename, std::ios::binary);
+	if (!file.is_open()) return false;
+
+	// Записуємо 4 матриці сирими байтами прямо з пам'яті:
+	file.write(reinterpret_cast<const char*>(w1.data()), w1.size() * sizeof(float));
+	file.write(reinterpret_cast<const char*>(b1.data()), b1.size() * sizeof(float));
+	file.write(reinterpret_cast<const char*>(w2.data()), w2.size() * sizeof(float));
+	file.write(reinterpret_cast<const char*>(b2.data()), b2.size() * sizeof(float));
+
+	file.close();
+	return true;
+}
+
+bool NeuralNet::load_binary(const std::string& filename) {
+	std::ifstream file(filename, std::ios::binary);
+	if (!file.is_open()) return false;
+
+	// Зчитуємо байти назад у матриці:
+	file.read(reinterpret_cast<char*>(w1.data()), w1.size() * sizeof(float));
+	file.read(reinterpret_cast<char*>(b1.data()), b1.size() * sizeof(float));
+	file.read(reinterpret_cast<char*>(w2.data()), w2.size() * sizeof(float));
+	file.read(reinterpret_cast<char*>(b2.data()), b2.size() * sizeof(float));
+
+	file.close();
+	return true;
 }

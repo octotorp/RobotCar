@@ -16,6 +16,9 @@ public:
 	Matrix<float, 4, 1> forward(const Matrix<float, 6, 1>& inputs);
 	void mutate(float rate = 0.05f, float strength = 0.1f);
 
+	bool save_binary(const std::string& filename);
+	bool load_binary(const std::string& filename);
+
 private:
 
 };

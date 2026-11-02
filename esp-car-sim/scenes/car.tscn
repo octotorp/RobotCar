@@ -4,6 +4,7 @@
 size = Vector2(60, 40)
 
 [node name="Car" type="Car"]
+collision_layer = 2
 gravity_scale = 0.0
 linear_damp = 3.0
 angular_damp = 5.0
@@ -16,18 +17,22 @@ shape = SubResource("RectangleShape2D_b0jew")
 [node name="RayFront" type="RayCast2D" parent="Rays"]
 position = Vector2(30, 0)
 target_position = Vector2(150, 0)
+hit_from_inside = true
 
 [node name="RayBack" type="RayCast2D" parent="Rays"]
 position = Vector2(-30, 0)
 target_position = Vector2(-150, 0)
+hit_from_inside = true
 
 [node name="RayLeft" type="RayCast2D" parent="Rays"]
 position = Vector2(0, -20)
 target_position = Vector2(0, -150)
+hit_from_inside = true
 
 [node name="RayRight" type="RayCast2D" parent="Rays"]
 position = Vector2(0, 20)
 target_position = Vector2(0, 150)
+hit_from_inside = true
 
 [node name="ColorBody" type="Node2D" parent="."]
 
