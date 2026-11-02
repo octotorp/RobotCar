@@ -1,2 +1,5 @@
 # Godot 4+ specific ignores
 esp-car-sim/.godot/
+esp-car-sim/.vs/
+esp-car-sim/out/
+esp-car-sim/godot-cpp/

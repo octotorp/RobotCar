@@ -1,0 +1,7 @@
+[configuration]
+entry_symbol = "car_library_init"
+compatibility_minimum = "4.1"
+
+[libraries]
+windows.debug.x86_64 = "res://bin/car_sim.dll"
+windows.release.x86_64 = "res://bin/car_sim.dll"
