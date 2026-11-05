@@ -78,6 +78,23 @@ namespace godot
 			fitness = 0.0;
 		}
 
+		double get_front_distance() 
+		{
+			return get_sensor_distance(ray_front);
+		}
+		double get_back_distance()
+		{
+			return get_sensor_distance(ray_back);
+		}
+		double get_right_distance()
+		{
+			return get_sensor_distance(ray_right);
+		}
+		double get_left_distance()
+		{
+			return get_sensor_distance(ray_left);
+		}
+
 		bool save_brain(String path) {
 			return brain.save_binary(path.utf8().get_data());
 		}

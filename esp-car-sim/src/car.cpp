@@ -3,8 +3,7 @@
 
 // --- TEST ---
 #include <godot_cpp/classes/input.hpp>
-#include <iostream>
-#include <fstream>
+
 // --- TEST ---
 
 using namespace godot;
@@ -14,6 +13,11 @@ Car::~Car() {};
 
 void Car::_bind_methods() 
 {
+	ClassDB::bind_method(D_METHOD("get_front_distance"), &Car::get_front_distance);
+	ClassDB::bind_method(D_METHOD("get_back_distance"), &Car::get_back_distance);
+	ClassDB::bind_method(D_METHOD("get_right_distance"), &Car::get_right_distance);
+	ClassDB::bind_method(D_METHOD("get_left_distance"), &Car::get_left_distance);
+
 	ClassDB::bind_method(D_METHOD("reset_state", "start_pos", "start_rot"), &Car::reset_state);
 	ClassDB::bind_method(D_METHOD("get_fitness"), &Car::get_fitness);
 	ClassDB::bind_method(D_METHOD("add_fitness", "amount"), &Car::add_fitness);
@@ -59,7 +63,7 @@ void Car::_physics_process(double delta)
 	if (d_right < SAFE_DIST) wall_penalty += (SAFE_DIST - d_right);
 	// Знімаємо бали пропорційно часу кадру:
 	if (wall_penalty > 0.0) {
-		add_fitness(-wall_penalty * 4096.0 * delta);
+		add_fitness(-wall_penalty * 8.0 * delta);
 	}
 
 	// --- TEST ---
@@ -95,30 +99,12 @@ void Car::_physics_process(double delta)
 	apply_wheel_force(POS_FR, right_power);
 	apply_wheel_force(POS_BR, right_power);*/
 
+	// --- TEST --
+
 	apply_wheel_force(POS_FL, motors_output(0));
 	apply_wheel_force(POS_BL, motors_output(1));
 	apply_wheel_force(POS_FR, motors_output(2));
 	apply_wheel_force(POS_BR, motors_output(3));
-
-
-	if (input->is_key_pressed(Key::KEY_G))
-	{
-		std::ofstream file("output.txt");
-		if (!(file.is_open())) return;
-
-		file << "DATA:\n"
-			<< "d_front: " << d_front << ";\n"
-			<< "d_back: " << d_back << ";\n"
-			<< "d_left: " << d_left << ";\n"
-			<< "d_right: " << d_right << ";\n"
-			;
-		file.close();
-	}
-	if (input->is_key_pressed(Key::KEY_R))
-	{
-		brain = NeuralNet();
-	}
-	// --- TEST --
 }
 
 double Car::get_sensor_distance(RayCast2D* ray)
