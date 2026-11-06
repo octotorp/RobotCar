@@ -4,7 +4,7 @@
 size = Vector2(20, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ukg5"]
-size = Vector2(20, 600)
+size = Vector2(100, 600)
 
 [node name="Obstacle" type="Node2D"]
 
@@ -27,8 +27,8 @@ offset_bottom = -60.0
 color = Color(0.97, 0.90889007, 0.3589, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="StaticBody2D"]
-offset_left = -10.0
+offset_left = -50.0
 offset_top = 60.0
-offset_right = 10.0
+offset_right = 50.0
 offset_bottom = 660.0
 color = Color(0.97, 0.90889007, 0.3589, 1)

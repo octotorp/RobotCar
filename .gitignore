@@ -4,3 +4,4 @@ esp-car-sim/.vs/
 esp-car-sim/out/
 esp-car-sim/godot-cpp/
 esp-car-sim/eigen/
+esp-car-sim/brain/
